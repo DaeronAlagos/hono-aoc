@@ -9,42 +9,41 @@ app.get('/', (c) => {
   return c.render(<h1>Advent of Code with Hono</h1>)
 })
 
+app.get('/:year/:day', (c) => { 
+  const year = c.req.param('year')
+  const day = c.req.param('day')
+  return c.render(<form action={`/${year}/${day}`} method="post">
+    <textarea name="input" style={{ width: '100%', height: '300px' }}></textarea>
+    <button type="submit">Submit</button>
+  </form>)
+})
 
-app.get('/2024/1', (c) => {
+app.post('/:year/:day', async (c) => {
+  const year = c.req.param('year')
+  const day = c.req.param('day')
+  const body = await c.req.parseBody()
+  const input = body.input
 
-  const sampleInput = `3   4
-      4   3
-      2   5
-      1   3
-      3   9
-      3   3`
-
-  const lines = sampleInput.split('\n')
-  const list1 = lines.map(line => parseInt(line.trim().split(/\s+/)[0], 10)).sort((a, b) => a - b)
-  const list2 = lines.map(line => parseInt(line.trim().split(/\s+/)[1], 10)).sort((a, b) => a - b)
-  const differences: number[] = []
-  for (let i = 0; i < list1.length; i++) {
-    differences.push(Math.abs(list1[i] - list2[i]))
+  const challengeYear = await import(`./challenges/${year}.ts`)
+  const challenge = challengeYear[`day${day}`]
+  try {
+    challenge(input)
+  } catch (error) {
+    return c.render(
+      <div>
+        <h1>Advent of Code {year} Day {day}</h1>
+        <h2>Solution not found</h2>
+      </div>
+    )
   }
-  const list1Filtered = list1.filter(n => !isNaN(n))
-  const list2Filtered = list2.filter(n => !isNaN(n))
-
-  const differencesSum = differences.reduce((a, b) => a + b, 0)
-
-  console.log(list1)
-  console.log(list2)
-  console.log(differences)
-  console.log(differencesSum)
-
-  const similarityScore = list1Filtered.reduce((acc, n, i) => {
-    const count = list2Filtered.filter(x => x === n).length
-    return acc + (n * count)
-  }, 0)
-
-  console.log(similarityScore)
+  const result = challenge(input)
 
   return c.render(
-    <h1>Advent of Code 2024 Day 1: {differencesSum} {similarityScore}</h1>
+    <div>
+      <h1>Advent of Code {year} Day {day}</h1>
+      <h2>Solution</h2>
+      <h3>Part 1: {result.partOne}</h3><h3>Part 2: {result.partTwo}</h3>
+    </div>
   )
 })
 
