@@ -1,21 +1,29 @@
 import { Hono } from 'hono'
+import { serveStatic } from '@hono/node-server/serve-static'
 import { renderer } from './renderer'
+import { Header } from './components/Header'
+import { InputForm } from './components/input-form'
+import { Layout } from './components/Layout'
+import './styles.css'
 
 const app = new Hono()
 
 app.use(renderer)
+app.use('/static/*', serveStatic({ root: './' }))
 
 app.get('/', (c) => {
-  return c.render(<h1>Advent of Code with Hono</h1>)
+  return c.html(
+    <Layout>
+      <Header />
+    </Layout>
+  )
 })
 
 app.get('/:year/:day', (c) => { 
   const year = c.req.param('year')
   const day = c.req.param('day')
-  return c.render(<form action={`/${year}/${day}`} method="post">
-    <textarea name="input" style={{ width: '100%', height: '300px' }}></textarea>
-    <button type="submit">Submit</button>
-  </form>)
+  return c.html(  
+    <InputForm year={year} day={day}/>)
 })
 
 app.post('/:year/:day', async (c) => {
