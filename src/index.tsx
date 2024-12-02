@@ -2,7 +2,7 @@ import { Hono } from 'hono'
 import { serveStatic } from '@hono/node-server/serve-static'
 import { renderer } from './renderer'
 import { Header } from './components/Header'
-import { InputForm } from './components/input-form'
+import { InputForm } from './components/InputForm'
 import { Layout } from './components/Layout'
 import './styles.css'
 
@@ -22,8 +22,12 @@ app.get('/', (c) => {
 app.get('/:year/:day', (c) => { 
   const year = c.req.param('year')
   const day = c.req.param('day')
-  return c.html(  
-    <InputForm year={year} day={day}/>)
+  return c.html(
+    <Layout>
+      <Header />
+      <InputForm year={year} day={day}/>
+    </Layout> 
+  )
 })
 
 app.post('/:year/:day', async (c) => {
