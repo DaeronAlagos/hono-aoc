@@ -2,7 +2,8 @@
   "name": "hono-aoc",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "bun run dev:tailwind & bunx --bun vite",
+    "dev:tailwind": "bunx --bun tailwindcss -i ./src/styles.css -o ./public/static/output.css --watch",
     "build": "vite build",
     "preview": "wrangler pages dev",
     "deploy": "bun run build && wrangler pages deploy"
