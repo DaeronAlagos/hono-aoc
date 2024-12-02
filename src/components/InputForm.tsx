@@ -1,3 +1,5 @@
+import { Button } from "./Button"
+
 export const InputForm = ({ year, day }: { year: string, day: string }) => {
     return (
         <form action={`/${year}/${day}`} method="post">
