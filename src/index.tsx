@@ -3,7 +3,6 @@ import { serveStatic } from '@hono/node-server/serve-static'
 import { renderer } from './renderer'
 import { Header } from './components/Header'
 import { InputForm } from './components/InputForm'
-import { Layout } from './components/Layout'
 import './styles.css'
 
 const app = new Hono()
