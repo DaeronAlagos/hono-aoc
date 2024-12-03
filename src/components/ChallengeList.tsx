@@ -10,7 +10,6 @@ const challenges = generateChallengeList();
 export const ChallengeList = () => {
   return (
     <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4">Advent of Code Challenges</h2>
       <div className="space-y-4">
         {challenges.map((challenge) => (
           <div key={challenge.year} className="border rounded-lg p-4">
