@@ -3,6 +3,7 @@ import { serveStatic } from '@hono/node-server/serve-static'
 import { renderer } from './renderer'
 import { Header } from './components/Header'
 import { InputForm } from './components/InputForm'
+import { Solution } from './components/Solution'
 import './styles.css'
 
 const app = new Hono()
@@ -38,11 +39,10 @@ app.post('/:year/:day', async (c) => {
   const result = challenge.default(input)
 
   return c.render(
-    <div>
-      <h1>Advent of Code {year} Day {day}</h1>
-      <h2>Solution</h2>
-      <h3>Part 1: {result.partOne}</h3><h3>Part 2: {result.partTwo}</h3>
-    </div>
+    <>
+      <Header />
+      <Solution part1={result.partOne} part2={result.partTwo} />
+    </>
   )
 })
 
