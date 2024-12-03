@@ -12,21 +12,20 @@ app.use(renderer)
 app.use('/static/*', serveStatic({ root: './' }))
 
 app.get('/', (c) => {
-  return c.html(
-    <Layout>
+  return c.render(
       <Header />
-    </Layout>
   )
 })
 
 app.get('/:year/:day', (c) => { 
   const year = c.req.param('year')
   const day = c.req.param('day')
-  return c.html(
-    <Layout>
+  return c.render(
+    <>
       <Header />
       <InputForm year={year} day={day}/>
-    </Layout> 
+    </>
+
   )
 })
 
