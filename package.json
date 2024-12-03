@@ -3,7 +3,7 @@
   "type": "module",
   "scripts": {
     "dev": "bun run dev:tailwind & bunx --bun vite",
-    "dev:tailwind": "bunx --bun tailwindcss -i ./src/styles.css -o ./public/static/output.css --watch",
+    "dev:tailwind": "bunx --bun tailwindcss -i ./src/styles.css -o ./public/static/style.css --watch",
     "build": "vite build",
     "preview": "wrangler pages dev",
     "deploy": "bun run build && wrangler pages deploy"
