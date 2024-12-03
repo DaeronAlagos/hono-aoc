@@ -1,15 +1,12 @@
 import { Hono } from 'hono'
-import { serveStatic } from '@hono/node-server/serve-static'
 import { renderer } from './renderer'
 import { Header } from './components/Header'
 import { InputForm } from './components/InputForm'
 import { Solution } from './components/Solution'
-import './styles.css'
 
 const app = new Hono()
 
 app.use(renderer)
-app.use('/static/*', serveStatic({ root: './' }))
 
 app.get('/', (c) => {
   return c.render(
