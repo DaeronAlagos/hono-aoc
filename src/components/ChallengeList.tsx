@@ -1,11 +1,18 @@
-import { generateChallengeList } from '../utils/generateChallengeList';
-
 interface Challenge {
   year: string;
   days: string[];
 }
 
-const challenges = generateChallengeList();
+const challenges = [
+  {
+    year: 2024,
+    days: [1, 2, 3]
+  },
+  {
+    year: 2024,
+    days: [1]
+  }
+]
 
 export const ChallengeList = () => {
   return (
