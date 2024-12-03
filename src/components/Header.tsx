@@ -1,7 +1,11 @@
 export const Header = () => {
     return (
-        <header className="mx-auto max-w-3xl text-center p-4">
-            <h1 className="text-3xl font-bold">Advent of Code with Hono</h1>
+        <header className="w-full bg-[repeating-linear-gradient(45deg,#166534,#166534_10px,#15803d_10px,#15803d_20px)] shadow-lg">
+            <div className="mx-auto max-w-7xl text-center py-6 px-4 bg-gradient-to-r from-red-600/90 to-green-700/90">
+                <h1 className="text-4xl font-bold text-white drop-shadow-lg">
+                    🎄 Advent of Code with Hono ⭐
+                </h1>
+            </div>
         </header>
     )
 }
